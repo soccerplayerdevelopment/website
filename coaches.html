@@ -34,18 +34,13 @@
       timestamp: new Date().toISOString()
     };
     try {
-      if (WEBHOOK_URL === 'YOUR_MAKE_COM_WEBHOOK_URL_HERE') {
-        await new Promise(r => setTimeout(r, 800));
-        this.formSuccess = true;
-      } else {
-        const res = await fetch(WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        if (res.ok) { this.formSuccess = true; }
-        else { this.formError = 'Something went wrong. Please try again or email us directly.'; }
-      }
+      const res = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (res.ok) { this.formSuccess = true; }
+      else { this.formError = 'Something went wrong. Please try again or email us directly.'; }
     } catch(e) {
       this.formError = 'Could not connect. Please check your connection and try again.';
     }
