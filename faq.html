@@ -3,7 +3,7 @@
   modalOpen: false,
   mobileMenuOpen: false,
   openFaq: null,
-  form: { firstName: '', lastName: '', email: '', gender: '', ageGroups: [] },
+  form: { firstName: '', lastName: '', email: '', gender: '', ageGroups: [], campTypes: [] },
   formSubmitting: false,
   formSuccess: false,
   formError: '',
@@ -18,9 +18,15 @@
     else this.form.ageGroups.splice(idx, 1);
   },
 
+  toggleCampType(val) {
+    const idx = this.form.campTypes.indexOf(val);
+    if (idx === -1) this.form.campTypes.push(val);
+    else this.form.campTypes.splice(idx, 1);
+  },
+
   async submitWaitlist() {
-    if (!this.form.firstName || !this.form.lastName || !this.form.email || !this.form.gender || !this.form.ageGroups.length) {
-      this.formError = 'Please fill in all fields and select at least one age group.';
+    if (!this.form.firstName || !this.form.lastName || !this.form.email || !this.form.gender || !this.form.ageGroups.length || !this.form.campTypes.length) {
+      this.formError = 'Please fill in all fields and select at least one age group and camp type.';
       return;
     }
     this.formSubmitting = true;
@@ -32,6 +38,7 @@
       email: this.form.email,
       gender: this.form.gender,
       ageGroups: this.form.ageGroups.join(', '),
+      campTypes: this.form.campTypes.join(', '),
       source: 'website-waitlist',
       timestamp: new Date().toISOString()
     };
@@ -189,6 +196,18 @@
             </template>
           </div>
         </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wide mb-2">Camp Type(s) <span class="text-gray-400 normal-case font-normal">(select all that apply)</span></label>
+          <div class="grid grid-cols-2 gap-2">
+            <template x-for="ct in ['PD Days', 'Summer', 'School Breaks', 'Seasonal Clinics/Sessions']" :key="ct">
+              <label class="flex items-center gap-2.5 border rounded-lg px-3 py-2 cursor-pointer transition-all"
+                :class="form.campTypes.includes(ct) ? 'border-spd-blue bg-spd-blue/5 text-spd-blue' : 'border-gray-200 hover:border-gray-300'">
+                <input type="checkbox" :value="ct" @change="toggleCampType(ct)" class="w-4 h-4 accent-spd-blue" />
+                <span class="text-sm font-semibold" x-text="ct"></span>
+              </label>
+            </template>
+          </div>
+        </div>
         <div x-show="formError" class="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-3 py-2.5" x-text="formError"></div>
         <button @click="submitWaitlist()" :disabled="formSubmitting"
           class="w-full bg-spd-blue text-white rounded-full py-3 font-semibold text-sm hover:bg-blue-800 active:scale-95 transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2">
@@ -291,7 +310,7 @@
                 </div>
               </button>
               <div x-show="openFaq === 2" x-collapse class="px-5 pb-5">
-                <p class="text-gray-600 leading-relaxed text-sm">The camp provides 5 days of professional coaching (or 1 day for PD Day camps) using a proven soccer development methodology. Water is supplied during breaks throughout the day. Participants receive a certified diploma upon completing the full week. Pricing and full inclusions will be announced when registration opens — join the waitlist to be first to know.</p>
+                <p class="text-gray-600 leading-relaxed text-sm">The camp provides 5 days of professional coaching (or 1 day for PD Day camps) using a proven soccer development methodology. Water is supplied during breaks throughout the day. Pricing and full inclusions will be announced when registration opens — join the waitlist to be first to know.</p>
               </div>
             </div>
 
@@ -431,7 +450,7 @@
                   <li class="flex items-start gap-2"><span class="text-spd-blue font-semibold w-28 flex-shrink-0">12:30 PM</span>Tactical training (until 1:30 PM)</li>
                   <li class="flex items-start gap-2"><span class="text-spd-blue font-semibold w-28 flex-shrink-0">1:30 PM</span>Match play &amp; competition</li>
                   <li class="flex items-start gap-2"><span class="text-spd-blue font-semibold w-28 flex-shrink-0">3:00 PM</span>Departure</li>
-                  <li class="flex items-start gap-2"><span class="text-spd-blue font-semibold w-28 flex-shrink-0">Day 5</span>Closing ceremony &amp; diploma at ~2:30 PM</li>
+                  <li class="flex items-start gap-2"><span class="text-spd-blue font-semibold w-28 flex-shrink-0">Day 5</span>Closing ceremony &amp; awards at ~2:30 PM</li>
                 </ul>
                 <p class="text-gray-500 text-xs mt-3">Schedule is subject to minor adjustments for weather or special activities.</p>
               </div>
@@ -537,7 +556,7 @@
           <h3 class="font-display text-2xl font-bold text-white uppercase mb-3">Still Have Questions?</h3>
           <p class="text-white/60 text-sm mb-6">We're happy to help. Send us a message and we'll get back to you as soon as possible.</p>
           <div class="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="mailto:hello@soccerplayerdevelopment.com" class="bg-spd-blue text-white font-semibold px-7 py-3 rounded-full hover:bg-blue-800 transition-colors text-sm uppercase tracking-wide">
+            <a href="mailto:info@soccerplayerdevelopment.com" class="bg-spd-blue text-white font-semibold px-7 py-3 rounded-full hover:bg-blue-800 transition-colors text-sm uppercase tracking-wide">
               Email Us
             </a>
             <button @click="openModal()" class="bg-white/10 border border-white/20 text-white font-semibold px-7 py-3 rounded-full hover:bg-white/20 transition-colors text-sm uppercase tracking-wide">
@@ -588,7 +607,7 @@
         <div>
           <h4 class="font-display font-semibold uppercase tracking-widest text-sm text-white mb-4">Get in Touch</h4>
           <ul class="space-y-2.5">
-            <li><a href="mailto:hello@soccerplayerdevelopment.com" class="text-white/55 text-sm hover:text-white transition-colors">hello@soccerplayerdevelopment.com</a></li>
+            <li><a href="mailto:info@soccerplayerdevelopment.com" class="text-white/55 text-sm hover:text-white transition-colors">info@soccerplayerdevelopment.com</a></li>
             <li><span class="text-white/55 text-sm">(306) 000-0000</span></li>
             <li><span class="text-white/55 text-sm">Saskatoon, SK</span></li>
           </ul>
