@@ -23,7 +23,7 @@
     }
     this.formSubmitting = true;
     this.formError = '';
-    const WEBHOOK_URL = 'YOUR_MAKE_COM_WEBHOOK_URL_HERE';
+    const WEBHOOK_URL = 'https://hook.us2.make.com/r9dseqm7k7y4z19qq5b4i14uk9g2lvcf';
     const payload = {
       firstName: this.form.firstName,
       lastName: this.form.lastName,
@@ -34,7 +34,7 @@
       timestamp: new Date().toISOString()
     };
     try {
-      if (WEBHOOK_URL === 'YOUR_MAKE_COM_WEBHOOK_URL_HERE') {
+      if (WEBHOOK_URL === 'https://hook.us2.make.com/r9dseqm7k7y4z19qq5b4i14uk9g2lvcf') {
         // Demo mode — webhook not yet configured
         await new Promise(r => setTimeout(r, 800));
         this.formSuccess = true;
