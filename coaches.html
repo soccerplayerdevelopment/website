@@ -147,8 +147,15 @@
           <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
         </div>
         <h4 class="font-display text-2xl font-semibold text-spd-navy uppercase mb-2">You're on the list!</h4>
-        <p class="text-gray-600 text-sm leading-relaxed">We'll email you as soon as camp registration opens.</p>
-        <button @click="closeModal()" class="mt-6 bg-spd-blue text-white rounded-full px-8 py-2.5 text-sm font-semibold hover:bg-blue-800 transition-colors">Done</button>
+        <p class="text-gray-700 text-sm font-medium mb-3">Check your email — a confirmation is on its way.</p>
+        <div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-left mb-4">
+          <p class="text-amber-800 text-xs leading-relaxed">
+            <span class="font-bold">Didn't see it?</span> Check your spam, junk, or promotions folder. If it's there, please mark it as safe — that way you'll be the first to know when registration opens and won't miss a thing.
+          </p>
+        </div>
+        <button @click="closeModal()" class="mt-2 bg-spd-blue text-white rounded-full px-8 py-2.5 text-sm font-semibold hover:bg-blue-800 transition-colors">
+          Got it!
+        </button>
       </div>
       <div x-show="!formSuccess" class="px-6 py-6 space-y-4">
         <div class="grid grid-cols-2 gap-3">
