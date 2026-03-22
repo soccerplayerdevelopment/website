@@ -141,17 +141,53 @@
     }
 
     /* Skill pill hover */
-    .skill-pill {
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-    .skill-pill:hover {
-      background: #004D98;
-      color: white;
-    }
+    .skill-pill { transition: background 0.2s ease; }
+    .skill-pill:hover { background: rgba(255,255,255,0.18); }
 
     /* Checkbox custom */
     input[type="checkbox"]:checked { accent-color: #004D98; }
-    input[type="radio"]:checked { accent-color: #004D98; }
+    input[type="radio"]:checked    { accent-color: #004D98; }
+
+    /* ─── TEXTURE & GRADIENT TREATMENTS ─────────────────── */
+
+    /* Dark navy: radial glows (blue top-left, red bottom-right) + dot grid */
+    .dark-textured {
+      background-color: #0a1628;
+      background-image:
+        radial-gradient(ellipse at 15%  0%,   rgba(0,77,152,0.55) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 100%,  rgba(165,0,68,0.30) 0%, transparent 55%),
+        radial-gradient(rgba(255,255,255,0.045) 1.5px, transparent 1.5px);
+      background-size: 100% 100%, 100% 100%, 26px 26px;
+    }
+
+    /* Blue: bright glow top-right, red glow bottom-left, diagonal hatching */
+    .blue-textured {
+      background-color: #004D98;
+      background-image:
+        radial-gradient(ellipse at 100%  0%,  rgba(255,255,255,0.14) 0%, transparent 48%),
+        radial-gradient(ellipse at   0% 100%, rgba(165,0,68,0.38)    0%, transparent 48%),
+        repeating-linear-gradient(
+          -52deg,
+          rgba(255,255,255,0.03) 0px,
+          rgba(255,255,255,0.03) 1px,
+          transparent            1px,
+          transparent            22px
+        );
+    }
+
+    /* Stats strip: centred blue glow + subtle grid lines */
+    .stats-textured {
+      background-color: #0d1e38;
+      background-image:
+        radial-gradient(ellipse at 50% 0%, rgba(0,77,152,0.65) 0%, transparent 65%),
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 100% 100%, 40px 40px, 40px 40px;
+    }
+
+    /* Angled divider clips */
+    .clip-bottom { clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%); padding-bottom: 5rem; }
+    .clip-top    { clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%); padding-top: 5rem; }
   </style>
 </head>
 
@@ -393,7 +429,7 @@
     </section>
 
     <!-- Stats strip -->
-    <div class="bg-spd-navy">
+    <div class="stats-textured">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
           <div class="py-5 px-6 text-center">
@@ -562,8 +598,58 @@
     <!-- ===================== END FEATURE CARDS ===================== -->
 
 
+    <!-- ===================== BOLD STATEMENT ===================== -->
+    <section class="py-20 lg:py-28 bg-white relative overflow-hidden">
+      <!-- Faint background circles for depth -->
+      <div class="absolute -top-24 -right-24 w-80 h-80 bg-spd-blue/5 rounded-full pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-spd-red/5 rounded-full pointer-events-none"></div>
+
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+        <!-- Soccer pitch icon -->
+        <div class="mx-auto mb-8 opacity-25 w-20 h-20">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full text-spd-navy">
+            <rect x="4" y="10" width="72" height="60" rx="2" stroke="currentColor" stroke-width="3"/>
+            <line x1="40" y1="10" x2="40" y2="70" stroke="currentColor" stroke-width="2"/>
+            <circle cx="40" cy="40" r="10" stroke="currentColor" stroke-width="2"/>
+            <rect x="4" y="26" width="14" height="28" stroke="currentColor" stroke-width="2"/>
+            <rect x="62" y="26" width="14" height="28" stroke="currentColor" stroke-width="2"/>
+            <circle cx="40" cy="40" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+
+        <!-- Big display text -->
+        <div class="space-y-1 mb-10">
+          <h2 class="font-display font-bold text-[clamp(3.5rem,10vw,8rem)] text-spd-navy uppercase leading-none tracking-tighter">INTENSE</h2>
+          <h2 class="font-display font-bold text-[clamp(3.5rem,10vw,8rem)] text-spd-red   uppercase leading-none tracking-tighter">HIGH-LEVEL</h2>
+          <h2 class="font-display font-bold text-[clamp(3.5rem,10vw,8rem)] text-spd-navy uppercase leading-none tracking-tighter">TRAINING</h2>
+        </div>
+
+        <!-- Infographic stat row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+          <div class="bg-spd-navy rounded-2xl p-5 text-center group hover:bg-spd-blue transition-colors duration-300">
+            <div class="font-display text-4xl font-bold text-white leading-none mb-1">5</div>
+            <div class="text-blue-300 text-xs font-bold uppercase tracking-widest group-hover:text-blue-200">Days of Camp</div>
+          </div>
+          <div class="bg-spd-red rounded-2xl p-5 text-center">
+            <div class="font-display text-4xl font-bold text-white leading-none mb-1">1:12</div>
+            <div class="text-red-200 text-xs font-bold uppercase tracking-widest">Coach Ratio</div>
+          </div>
+          <div class="bg-spd-navy rounded-2xl p-5 text-center group hover:bg-spd-blue transition-colors duration-300">
+            <div class="font-display text-4xl font-bold text-white leading-none mb-1">6h</div>
+            <div class="text-blue-300 text-xs font-bold uppercase tracking-widest group-hover:text-blue-200">Daily Training</div>
+          </div>
+          <div class="bg-spd-red rounded-2xl p-5 text-center">
+            <div class="font-display text-4xl font-bold text-white leading-none mb-1">4</div>
+            <div class="text-red-200 text-xs font-bold uppercase tracking-widest">Age Groups</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===================== END BOLD STATEMENT ===================== -->
+
+
     <!-- ===================== METHODOLOGY ===================== -->
-    <section class="py-20 lg:py-28 bg-spd-navy overflow-hidden">
+    <section class="dark-textured py-20 lg:py-28 overflow-hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <!-- Image -->
@@ -748,7 +834,7 @@
               </div>
               <div class="relative">
                 <div class="inline-block bg-spd-blue/80 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-2">Head Coach</div>
-                <h3 class="font-display text-2xl font-bold text-white uppercase">Keiske Johnson</h3>
+                <h3 class="font-display text-2xl font-bold text-white uppercase">Keisuke Johnston</h3>
               </div>
             </div>
             <div class="p-6">
@@ -772,7 +858,7 @@
               </div>
               <div class="relative">
                 <div class="inline-block bg-spd-red/80 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-2">Coach</div>
-                <h3 class="font-display text-2xl font-bold text-white uppercase">Jacob Humpha</h3>
+                <h3 class="font-display text-2xl font-bold text-white uppercase">Jacob Houmphanh</h3>
               </div>
             </div>
             <div class="p-6">
@@ -803,7 +889,7 @@
 
 
     <!-- ===================== SKILLS / ENHANCE YOUR GAME ===================== -->
-    <section class="py-20 lg:py-28 bg-spd-blue">
+    <section class="blue-textured py-20 lg:py-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <div>
@@ -891,7 +977,7 @@
           <a href="faq.html" class="bg-spd-navy text-white font-semibold px-7 py-3.5 rounded-full hover:bg-opacity-90 transition-all uppercase tracking-wide text-sm">
             View FAQ
           </a>
-          <a href="mailto:hello@soccerplayerdevelopment.com" class="border-2 border-spd-navy text-spd-navy font-semibold px-7 py-3.5 rounded-full hover:bg-spd-navy hover:text-white transition-all uppercase tracking-wide text-sm">
+          <a href="mailto:info@soccerplayerdevelopment.com" class="border-2 border-spd-navy text-spd-navy font-semibold px-7 py-3.5 rounded-full hover:bg-spd-navy hover:text-white transition-all uppercase tracking-wide text-sm">
             Contact Us
           </a>
         </div>
@@ -902,7 +988,7 @@
 
 
   <!-- ===================== FOOTER ===================== -->
-  <footer class="bg-spd-navy text-white">
+  <footer class="dark-textured text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
       <div class="grid md:grid-cols-4 gap-10">
 
@@ -951,9 +1037,9 @@
           <h4 class="font-display font-semibold uppercase tracking-widest text-sm text-white mb-4">Get in Touch</h4>
           <ul class="space-y-2.5">
             <li>
-              <a href="mailto:hello@soccerplayerdevelopment.com" class="text-white/55 text-sm hover:text-white transition-colors flex items-center gap-2">
+              <a href="mailto:info@soccerplayerdevelopment.com" class="text-white/55 text-sm hover:text-white transition-colors flex items-center gap-2">
                 <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                hello@soccerplayerdevelopment.com
+                info@soccerplayerdevelopment.com
               </a>
             </li>
             <li>
